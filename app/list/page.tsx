@@ -1,6 +1,7 @@
 import React from "react";
 import { connectDB } from "@/util/database";
 import { PostType } from "@/util/database";
+import Link from "next/link";
 
 const List = async () => {
     const db = (await connectDB).db(process.env.DB_NAME);
@@ -9,10 +10,10 @@ const List = async () => {
     return (
         <div className="list-bg">
             {result.map((item: PostType) => (
-                <div className="list-item" key={item._id}>
+                <Link className="list-item" href={`/detail/${item._id}`} key={item._id}>
                     <h4>{item.title}</h4>
                     <p>{item.content}</p>
-                </div>
+                </Link>
             ))}
         </div>
     );
