@@ -1,4 +1,10 @@
-import { MongoClient, MongoClientOptions } from "mongodb";
+import { MongoClient, MongoClientOptions, ObjectId } from "mongodb";
+
+export interface PostType {
+    _id: string;
+    title: string;
+    content: string;
+}
 
 declare global {
     var _mongo: MongoClient | undefined;
