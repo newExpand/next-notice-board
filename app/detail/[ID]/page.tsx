@@ -17,8 +17,6 @@ const Detail = async ({ params }: DetailProps) => {
         _id: new ObjectId(params?.ID),
     });
 
-    console.log();
-
     return (
         <div>
             <h4>상세페이지</h4>

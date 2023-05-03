@@ -10,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         try {
             const db = (await connectDB).db(process.env.DB_NAME);
             db.collection(process.env.DB_COLLECTION_NAME).insertOne(req.body);
-            return res.redirect(302, "/list");
+            res.redirect(302, "/list");
         } catch (err) {}
     }
 }
