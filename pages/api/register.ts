@@ -5,7 +5,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (req.method === "POST") {
         try {
             const client = await connectDB;
-            const db = client.db(process.env.DB_NAME);
+            const db = await client.db(process.env.DB_NAME);
             const { email, password } = req.body;
 
             const dupleEmail = await db
