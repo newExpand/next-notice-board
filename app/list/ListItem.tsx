@@ -34,6 +34,12 @@ const ListItem: React.FC<ListItemProps> = ({ dbResult }) => {
             parentTarget.style.display = "none";
             setDbData(data);
         }, 1000);
+
+        // 쿼리스트링 하는법
+        // fetch("/api/test?name=lee&age=20");
+
+        // url 파라미터 문법 쓰는법
+        // fetch("/api/abc/12");
     };
 
     return (
