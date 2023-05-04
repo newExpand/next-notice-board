@@ -1,6 +1,7 @@
 import React from "react";
+import { connectDB } from "@/util/database";
 
-const page = () => {
+const Register = async () => {
     return (
         <form action="/api/register" method="POST">
             <input type="email" name="email" required />
@@ -10,4 +11,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Register;

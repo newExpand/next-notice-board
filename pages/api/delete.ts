@@ -6,12 +6,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (req.method === "POST") {
         const client = await connectDB;
         const db = await client.db(process.env.DB_NAME);
-        const { _id, title, content } = req.body;
+
+        const deleteDB = await db
+            .collection(process.env.DB_COLLECTION_NAME)
+            .deleteOne({ _id: new ObjectId(req.body) });
 
         const result = await db
             .collection(process.env.DB_COLLECTION_NAME)
-            .updateOne({ _id: new ObjectId(_id) }, { $set: { title, content } });
+            .find()
+            .toArray();
 
-        res.redirect(302, "/list");
+        return res.status(200).json(result);
+        // res.status(200).json("삭제 완료");
     }
 }
