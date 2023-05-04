@@ -13,7 +13,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             .updateOne({ _id: new ObjectId(_id) }, { $set: { title, content } });
 
         res.redirect(302, "/list");
-        try {
-        } catch (err) {}
+    }
+
+    if (req.method === "DELETE") {
+        const client = await connectDB;
+        const db = await client.db(process.env.DB_NAME);
+
+        await db
+            .collection(process.env.DB_COLLECTION_NAME)
+            .deleteOne({ _id: new ObjectId(req.body) });
+
+        const result = await db
+            .collection(process.env.DB_COLLECTION_NAME)
+            .find()
+            .toArray();
+
+        return res.status(200).json(result);
     }
 }
