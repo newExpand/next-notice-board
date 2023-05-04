@@ -38,8 +38,20 @@ const ListItem: React.FC<ListItemProps> = ({ dbResult }) => {
         // 쿼리스트링 하는법
         // fetch("/api/test?name=lee&age=20");
 
+        // const response = await fetch(`/api/test/?id=${id}`);
+
+        // const data = await response.json();
+
+        // setDbData(data);
+
         // url 파라미터 문법 쓰는법
         // fetch("/api/abc/12");
+
+        // const response = await fetch(`/api/abc/${id}`);
+
+        // const data = await response.json();
+
+        // setDbData(data);
     };
 
     return (
