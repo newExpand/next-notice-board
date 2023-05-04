@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 interface ListItemProps {
-    dbResult: [];
+    dbResult: any;
 }
 
 const ListItem: React.FC<ListItemProps> = ({ dbResult }) => {
@@ -29,24 +29,12 @@ const ListItem: React.FC<ListItemProps> = ({ dbResult }) => {
 
         // @ts-ignore
         parentTarget.style.opacity = 0;
+
         setTimeout(() => {
             parentTarget.style.display = "none";
-            console.log("asd");
             setDbData(data);
         }, 1000);
     };
-
-    useEffect(() => {
-        fetch("/api/test", {
-            method: "GET",
-        })
-            .then((res) => {
-                return res.json();
-            })
-            .then((res) => {
-                setDbData(res);
-            });
-    }, [setDbData]);
 
     return (
         <>
