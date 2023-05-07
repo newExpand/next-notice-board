@@ -18,7 +18,12 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
 
         await db.collection(process.env.DB_COLLECTION_NAME_COMMENT).insertOne(data);
 
-        res.status(200).json("저장완료");
+        const result = await db
+            .collection(process.env.DB_COLLECTION_NAME_COMMENT)
+            .find({ parent: new ObjectId(parent) })
+            .toArray();
+
+        res.status(200).json(result);
     }
 
     if (req.method === "GET") {

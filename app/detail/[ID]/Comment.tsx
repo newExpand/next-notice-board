@@ -22,7 +22,12 @@ const Comment: React.FC<CommentProps> = ({ parentPageId }) => {
     };
 
     const handleClick = () => {
-        fetch("/api/comments", { method: "POST", body: JSON.stringify(data) });
+        fetch("/api/comments", { method: "POST", body: JSON.stringify(data) })
+            .then((res) => res.json())
+            .then((res) => {
+                setCommentList(res);
+                setComment("");
+            });
     };
 
     useEffect(() => {
@@ -35,6 +40,7 @@ const Comment: React.FC<CommentProps> = ({ parentPageId }) => {
 
     return (
         <div>
+            <hr />
             {commentList.map(
                 (item: {
                     _id: string;
@@ -46,7 +52,7 @@ const Comment: React.FC<CommentProps> = ({ parentPageId }) => {
                 )
             )}
             <div>댓글목록</div>
-            <input onChange={handleCommentChange} />
+            <input value={comment} onChange={handleCommentChange} />
             <button onClick={handleClick}>댓글전송</button>
         </div>
     );
