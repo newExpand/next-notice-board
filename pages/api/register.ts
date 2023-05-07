@@ -1,9 +1,13 @@
 import { connectDB } from "@/util/database";
 import { NextApiRequest, NextApiResponse } from "next";
+import bcrypt from "bcrypt";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === "POST") {
         try {
+            const hash = await bcrypt.hash(req.body.password, 10);
+            req.body.password = hash;
+
             const client = await connectDB;
             const db = await client.db(process.env.DB_NAME);
             const { email, password } = req.body;
